@@ -14,7 +14,17 @@ namespace ZooManagementSystem
 {
     public partial class visitorHome : Form
     {
-        //private List<Image> imageList = new List<Image>();
+        // slideshow on the visitor home page: real animal photos from Resources and Photos\AnimalImages
+        private readonly List<Image> imageList = new List<Image>();
+        private static readonly string[] SlideImages =
+        {
+            "Kota-Lion-2023-1-640x480.jpg",
+            "istockphoto-119356838-612x612.jpg",
+            "Zebra.jpg",
+            "cute-red-panda-dl4pm2ycuko8eyl0.jpg",
+            "flamingo-4471367_1280.jpg",
+            "hippo-3644217_1920.jpg",
+        };
         private int currentImageIndex = 0;
         private int userId;
         public visitorHome(int userId)
@@ -37,36 +47,56 @@ namespace ZooManagementSystem
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //if (imageList.Count == 0) return;
+            if (imageList.Count < 2 || !Visible) return;
 
-            //currentImageIndex = (currentImageIndex + 1) % imageList.Count;
+            currentImageIndex = (currentImageIndex + 1) % imageList.Count;
 
             // Use sync versions
-            //guna2Transition1.HideSync(guna2PictureBox1);
-            //guna2PictureBox1.Image = imageList[currentImageIndex];
-            //guna2Transition1.ShowSync(guna2PictureBox1);
+            guna2Transition1.HideSync(guna2PictureBox1);
+            guna2PictureBox1.Image = imageList[currentImageIndex];
+            guna2Transition1.ShowSync(guna2PictureBox1);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            //imageList.Add(Image.FromFile("zoo1.jpg"));
-           // imageList.Add(Image.FromFile("zoo2.jpg"));
-            //imageList.Add(Image.FromFile("zoo3.jpg"));
+            foreach (string file in SlideImages)
+            {
+                Image photo = AssetPath.Load(file);
+                if (photo != null) imageList.Add(FitTo(photo, guna2PictureBox1.Size));
+            }
 
             // Display first image
-            //if (imageList.Count > 0)
-            //{
-             //   guna2PictureBox1.Image = imageList[0];
-            //}
+            if (imageList.Count > 0)
+            {
+                guna2PictureBox1.Image = imageList[0];
+            }
             // Set up timer
-            //timer1.Interval = 5000; // 3 seconds
-            //timer1.Start();
+            timer1.Interval = 4000; // 4 seconds
+            timer1.Start();
 
+        }
+
+        /// <summary>Crops a photo to the picture box's shape so the stretch mode does not distort it.</summary>
+        private static Image FitTo(Image source, Size box)
+        {
+            double scale = Math.Max((double)box.Width / source.Width, (double)box.Height / source.Height);
+            int w = Math.Min(source.Width, (int)Math.Round(box.Width / scale));
+            int h = Math.Min(source.Height, (int)Math.Round(box.Height / scale));
+            var crop = new Rectangle((source.Width - w) / 2, (source.Height - h) / 2, w, h);
+            var result = new Bitmap(box.Width, box.Height);
+            using (var g = Graphics.FromImage(result))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(source, new Rectangle(Point.Empty, box), crop, GraphicsUnit.Pixel);
+            }
+            source.Dispose();
+            return result;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            timer1.Stop();
             
         }
 

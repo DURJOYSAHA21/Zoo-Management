@@ -19,13 +19,13 @@ namespace ZooManagementSystem
         private int userId;
         private bool isPlaying = false;
         private bool endReached = false;
-        string imagePath1 = @"C:\Users\Lenovo\source\repos\ZooManagementSystemSln\ZooManagementSystem\Resources\play.png";
-        string imagePath2 = @"C:\Users\Lenovo\source\repos\ZooManagementSystemSln\ZooManagementSystem\Resources\pause.png";
+        string imagePath1 = AssetPath.Find("play.png") ?? @"C:\Users\Lenovo\source\repos\ZooManagementSystemSln\ZooManagementSystem\Resources\play.png";
+        string imagePath2 = AssetPath.Find("pause.png") ?? @"C:\Users\Lenovo\source\repos\ZooManagementSystemSln\ZooManagementSystem\Resources\pause.png";
         public Accessibity(int userId)
         {
             InitializeComponent();
             this.userId = userId;
-            string videoPath = @"C:\Users\Lenovo\source\repos\ZooManagementSystemSln\ZooManagementSystem\Resources\zoo_video.mp4";
+            string videoPath = AssetPath.Find("zoo_video.mp4") ?? @"C:\Users\Lenovo\source\repos\ZooManagementSystemSln\ZooManagementSystem\Resources\zoo_video.mp4";
 
             if (!File.Exists(videoPath))
             {

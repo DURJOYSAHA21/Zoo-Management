@@ -114,9 +114,10 @@ private Guna2Panel CreateAnimalCard(int animalId, string name, string species, s
 
             try
             {
-                if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+                string found = AssetPath.Find(imagePath);
+                if (found != null)
                 {
-                    pictureBox.Image = Image.FromFile(imagePath);
+                    pictureBox.Image = Image.FromFile(found);
                     pictureBox.UseTransparentBackground = true;
                 }
                 else

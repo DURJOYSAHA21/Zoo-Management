@@ -41,7 +41,7 @@ namespace ZooManagementSystem
                 labelSpecies.Text = dt.Rows[n]["Species"].ToString();
                 labelSName.Text = "Scientific Name:" + dt.Rows[n]["ScientificName"].ToString();
                 labelZooID.Text = "Zoo ID : " + dt.Rows[n]["AnimalID"].ToString();
-                pictureBoxAnimalPicture.ImageLocation =  dt.Rows[n]["ProfileImage"].ToString();
+                pictureBoxAnimalPicture.ImageLocation = AssetPath.Find(dt.Rows[n]["ProfileImage"].ToString());
                 string imagePath = dt.Rows[n]["ProfileImage"].ToString();
                 /*if (!string.IsNullOrWhiteSpace(imagePath) && System.IO.File.Exists(imagePath))
                 {

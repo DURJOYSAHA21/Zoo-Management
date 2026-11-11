@@ -73,7 +73,9 @@ namespace ZooManagementSystem
                     {
                         try
                         {
-                            picImage.Image = Image.FromFile(EmployeePicture);
+                            // a photo saved on another computer is simply skipped
+                            Image photo = AssetPath.Load(EmployeePicture);
+                            if (photo != null) picImage.Image = photo;
                             picImage.SizeMode = PictureBoxSizeMode.StretchImage;
                         }
                         catch (Exception ex)

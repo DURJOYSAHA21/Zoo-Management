@@ -104,6 +104,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssetPath.cs" />
     <Compile Include="Accessibity.cs">
       <SubType>Form</SubType>
     </Compile>

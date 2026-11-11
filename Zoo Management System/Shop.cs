@@ -25,7 +25,7 @@ namespace ZooManagementSystem
         {
             try
             {
-                string query = "SELECT ProductID, Name FROM Products";
+                string query = "SELECT ProductID, Name, ImagePath FROM Products";
                 DataTable dt = DataAccess.GetData(query);
 
                 if (dt.Rows.Count == 0)
@@ -41,7 +41,8 @@ namespace ZooManagementSystem
                     productList.Add(new Product
                     {
                         ProductID = Convert.ToInt32(row["ProductID"]),
-                        Name = row["Name"].ToString()
+                        Name = row["Name"].ToString(),
+                        ImagePath = row["ImagePath"].ToString()
                     });
                 }
 
@@ -51,6 +52,14 @@ namespace ZooManagementSystem
                     pnLabel3.Text = productList[1].Name;
                 if (productList.Count >= 3)
                     pnLabel2.Text = productList[2].Name;
+
+                // product pictures (same order as the click handlers below)
+                var pictures = new[] { colorkitButton, wallArtButton, markerButton };
+                for (int i = 0; i < pictures.Length && i < productList.Count; i++)
+                {
+                    Image picture = AssetPath.Load(productList[i].ImagePath);
+                    if (picture != null) pictures[i].BackgroundImage = picture;
+                }
             }
             catch (Exception ex)
             {
@@ -61,6 +70,7 @@ namespace ZooManagementSystem
         {
             public int ProductID { get; set; }
             public string Name { get; set; }
+            public string ImagePath { get; set; }
         }
 
         private void colorkitButton_Click(object sender, EventArgs e)
@@ -97,7 +107,8 @@ namespace ZooManagementSystem
                     SetControlValue(productFrame, "PriceLabel", $"£{row["Price"]}");
                     SetControlValue(productFrame, "quantityLabel", row["StockQuantity"].ToString());
 
-                    string imagePath = Application.StartupPath + "\\" + row["ImagePath"].ToString();
+                    string imagePath = AssetPath.Find(row["ImagePath"].ToString())
+                        ?? Application.StartupPath + "\\" + row["ImagePath"].ToString();
                     SetProductImage(productFrame, imagePath);
 
                     productFrame.Show();
