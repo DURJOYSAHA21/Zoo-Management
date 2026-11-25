@@ -374,14 +374,14 @@ namespace ZooManagementSystem
 
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
                 {
-                    Credentials = new NetworkCredential("octolusminologia@gmail.com", "yfpz uybx lrfo efjc"),
+                    Credentials = new NetworkCredential(MailSettings.User, MailSettings.Password),
                     EnableSsl = true
                 };
 
 
                 MailMessage message = new MailMessage
                 {
-                    From = new MailAddress("octolusminologia@gmail.com", "London Zoo"),
+                    From = new MailAddress(MailSettings.User, "London Zoo"),
                     Subject = "Your OTP for London Zoo Purchase",
                     Body = $"Your OTP for purchase is: {generatedOTP}\nThis OTP is valid for 5 minutes.",
                     IsBodyHtml = false

@@ -17,9 +17,9 @@ namespace ZooManagementSystem
     {
         public static void SendEmail(string toEmail, string subject, string body)
         {
-            var fromAddress = new MailAddress("durjoy.saha1115@gmail.com", "Zoo Management System");
+            var fromAddress = new MailAddress(MailSettings.User, "Zoo Management System");
             var toAddress = new MailAddress(toEmail);
-            string fromPassword = "ghim fljx zfwf ntdu"; // app password
+            string fromPassword = MailSettings.Password; // from secrets.config
 
             var smtp = new SmtpClient
             {

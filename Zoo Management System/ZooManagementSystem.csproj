@@ -65,6 +65,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SqlClient, Version=4.6.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SqlClient.4.8.3\lib\net461\System.Data.SqlClient.dll</HintPath>
@@ -105,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetPath.cs" />
+    <Compile Include="MailSettings.cs" />
     <Compile Include="Accessibity.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -312,7 +314,9 @@
       <DependentUpon>ProductFrame.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Report.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -493,12 +497,14 @@
     <EmbeddedResource Include="ProductFrame.resx">
       <DependentUpon>ProductFrame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="..\Properties\Resources.resx">
+      <Link>Properties\Resources.resx</Link>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="..\Properties\Resources.Designer.cs">
+      <Link>Properties\Resources.Designer.cs</Link>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -543,11 +549,17 @@
       <DependentUpon>WorkShedule.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
+    <None Include="secrets.example.config" />
+    <None Include="secrets.config" Condition="Exists('secrets.config')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Properties\Settings.settings">
+      <Link>Properties\Settings.settings</Link>
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Include="..\Properties\Settings.Designer.cs">
+      <Link>Properties\Settings.Designer.cs</Link>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -557,16 +569,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\image.jpg" />
+    <None Include="..\Resources\image.jpg">
+      <Link>Resources\image.jpg</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\v677-ken-26b-animalbadge %281%29.jpg" />
+    <None Include="..\Resources\v677-ken-26b-animalbadge %281%29.jpg">
+      <Link>Resources\v677-ken-26b-animalbadge %281%29.jpg</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ChatGPT Image Jul 4, 2025, 09_53_54 PM.png" />
+    <None Include="..\Resources\ChatGPT Image Jul 4, 2025, 09_53_54 PM.png">
+      <Link>Resources\ChatGPT Image Jul 4, 2025, 09_53_54 PM.png</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ChatGPT Image Jul 4, 2025, 10_12_52 PM.png" />
+    <None Include="..\Resources\ChatGPT Image Jul 4, 2025, 10_12_52 PM.png">
+      <Link>Resources\ChatGPT Image Jul 4, 2025, 10_12_52 PM.png</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

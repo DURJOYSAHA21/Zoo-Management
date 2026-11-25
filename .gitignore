@@ -1,0 +1,7 @@
+# local only: Gmail app password for OTP emails (see Zoo Management System/secrets.example.config)
+secrets.config
+
+# NuGet packages and Visual Studio build output
+packages/
+Zoo Management System/bin/
+Zoo Management System/obj/
