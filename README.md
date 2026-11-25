@@ -55,7 +55,7 @@ You need Windows, Visual Studio and SQL Server Express (instance name `SQLEXPRES
 
 1. Create the database: run `Sql/Sql.sql` in SQL Server Management Studio. It creates a database called `Project` with sample data. If your SQL Server is not version 16, change the data-file paths at the top of the script first.
 2. Point the app at your server. The connection string is in `Zoo Management System/DataAccess.cs` (lines 18 and 44). Replace `LAPTOP-VA6SNT9S` with your computer name.
-3. For OTP emails, copy `Zoo Management System/secrets.example.config` to `secrets.config` in the same folder, then fill in a Gmail address and an [app password](https://myaccount.google.com/apppasswords). `secrets.config` is git-ignored.
+3. For OTP emails, follow the steps written inside `Zoo Management System/secrets.example.config`. In short: copy it to `secrets.config` in the same folder, then fill in your own Gmail address and an [app password](https://myaccount.google.com/apppasswords). OTP emails are then sent from your account. `secrets.config` is git-ignored, and without it the app runs but cannot send OTPs.
 4. Open `ZooManagementSystem.sln`, restore NuGet packages and run.
 
 To log in as an admin, press **Shift + A** while the Login button has focus.
